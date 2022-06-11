@@ -84,6 +84,20 @@ public class ProductTest {
     }
 
     @Test
+    void shouldManagerAlreadyAddProduct() {
+        Book book1 = new Book(1, "War and Peace", "Lev Tolstoy");
+        Book book2 = new Book(2, "Oblomov", "Ivan Goncharov");
+        Book book3 = new Book(1, "Fathers and Sons", "Ivan Turgenev");
+
+        manager.add(book1);
+        manager.add(book2);
+
+        Assertions.assertThrows(AlreadyExistsException.class, () -> {
+            manager.add(book3);
+        });
+    }
+
+    @Test
     void shouldManagerSearchByBookName() {
         Book book1 = new Book(1, "War and Peace", "Lev Tolstoy");
         Book book2 = new Book(2, "Oblomov", "Ivan Goncharov");

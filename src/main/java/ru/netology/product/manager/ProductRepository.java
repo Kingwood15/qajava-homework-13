@@ -11,6 +11,11 @@ public class ProductRepository {
 
     //сохранить/добавить объект
     public void save(Product newProduct) {
+        if (products.length != 0) {
+            if (findById(newProduct.getId()) != null) {
+                throw new AlreadyExistsException("Element with id: " + newProduct + " already exist");
+            }
+        }
         int length = products.length + 1;
         Product[] tmp = new Product[length];
 
